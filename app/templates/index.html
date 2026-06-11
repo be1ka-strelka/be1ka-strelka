@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аналитика тренеров — школа детского развития</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>📊 Аналитика дисциплины тренеров</h1>
+  <p class="sub">Загрузите Excel-файлы по месяцам — сервис посчитает отмены, переносы, замены, динамику учеников и прогноз на лето.</p>
+</header>
+
+<section class="upload card">
+  <input type="file" id="files" multiple accept=".xlsx,.xls">
+  <button id="btn">Анализировать</button>
+  <span id="hint">Можно выбрать несколько файлов (февраль, март, апрель, май…)</span>
+  <div id="error" class="error hidden"></div>
+</section>
+
+<main id="report" class="hidden">
+
+  <section class="card">
+    <h2>Сводка по школе</h2>
+    <div id="totals" class="totals-grid"></div>
+    <p class="months-line">Загруженные месяцы: <b id="monthsList"></b></p>
+  </section>
+
+  <section class="card">
+    <h2>Тренер: динамика и показатели</h2>
+    <label>Выберите тренера (ID):
+      <select id="teacherSelect"></select>
+    </label>
+    <div class="teacher-metrics" id="teacherMetrics"></div>
+    <div class="chart-wrap"><canvas id="dynamicsChart"></canvas></div>
+    <div class="chart-wrap"><canvas id="discChart"></canvas></div>
+  </section>
+
+  <section class="card two-col">
+    <div>
+      <h2>🔺 Больше всего переносов/замен (по инициативе тренера)</h2>
+      <table id="tableMost"></table>
+    </div>
+    <div>
+      <h2>🔻 Меньше всего переносов/замен (по инициативе тренера)</h2>
+      <table id="tableLeast"></table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>☀️ Прогноз на лето (июнь–август)</h2>
+    <p class="note" id="forecastNote"></p>
+    <div class="chart-wrap"><canvas id="summerChart"></canvas></div>
+    <table id="tableSummer"></table>
+  </section>
+
+  <section class="card">
+    <h2>Полная таблица по тренерам</h2>
+    <input type="text" id="search" placeholder="Поиск по ID тренера…">
+    <button id="exportBtn" type="button">⬇ Скачать CSV</button>
+    <div class="table-scroll"><table id="tableAll"></table></div>
+  </section>
+
+</main>
+
+<footer>Локальный инструмент · данные не покидают компьютер</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
